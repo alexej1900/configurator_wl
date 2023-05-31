@@ -1,0 +1,97 @@
+@import '../assets/scss/abstracts/variables';
+
+.summary {
+	position: relative;
+	overflow: hidden;
+	top: 7.5rem;
+	margin-bottom: 14.5rem;
+	
+	.container {
+		width: 100%;
+		max-width: 1440px;
+		margin: 0 auto;
+	}
+
+	.mainImage {
+		position: relative;
+	}
+
+	&__overview {
+		padding: 6.4rem 0 0 ;
+		width: 100%;
+
+		@media (max-width: $screen-xxl) {
+			padding: 2.4rem 0 0 ;
+		}
+
+		&_content {
+			@include flex-center-center;
+			flex-wrap: wrap;
+			gap: 1.6rem;
+			width: 100%;
+			padding: 0 2.4rem;
+
+			@media (max-width: $screen-lg) {
+				flex-direction: column;
+			}
+		}
+
+		&_image {
+			flex: 1 1 50%;
+			max-width: 40rem;
+
+			@media (max-width: $screen-lg) {
+				width: 100%;
+			}
+		}
+
+		.stats {
+			flex: 1 1 50%;
+			max-width: 40rem;
+
+			@media (max-width: $screen-lg) {
+				// flex: 0 0 100%;
+				width: 100%;
+				max-width: 80rem;
+			}
+		}
+
+		&_line {
+			padding: 0.5rem 0;
+			border-bottom: 1px solid var(--color__secondary);  
+			@include font(1.6rem, 400, 135%);
+
+			&_heighlite {
+				text-transform: uppercase;
+				font-weight: 600;
+				background-color: var(--color__secondary_20);
+			}
+		}
+
+		& div:last-child {
+			text-align: right;
+		}
+
+		.notice {
+			width: 100%;
+			max-width: 80rem;
+			margin-top: 1.6rem;
+			// padding: 2.4rem 0;
+
+			p {
+				text-align: start;
+				@include font(1.6rem, 400, 135%);
+				margin-top: 1.6rem;
+			}
+		}
+	}
+
+	.title {
+		margin-bottom: 32px;
+	}
+}
+
+.pdfData {
+	position: absolute;
+	right: 100%;
+}

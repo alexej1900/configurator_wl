@@ -1,0 +1,124 @@
+@import '/assets/scss/abstracts/variables';
+
+.footer {
+  margin-top: 6rem;
+  position: relative;
+  background: #F0F0F0;
+
+  &__container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    @include flex-center-center;
+    flex-direction: column;
+
+    .back__btn {
+      @include flex-center-center;
+      width: 100%;
+      padding: 2.6rem 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      transition: all 3s linear;
+      cursor: pointer;
+
+      svg {
+        position: relative;
+        right: 0px;
+        transition: all .5s linear;
+      }
+
+      &:hover {
+
+        svg {
+          right: 2rem;
+        }
+      }
+
+      &_title {
+        margin-left: 1.2rem;
+        @include p__small;
+        color: $color__cta-primary--default;
+      }
+    }
+  }
+
+  &__content {
+    @include flex-center-center;
+    padding: 3.2rem 0;
+
+    @media (max-width: $screen-lg) {
+      flex-direction: column;
+    }
+
+    &_links {
+      width: 30rem;
+      margin-right: 1.6rem;
+
+      @media (max-width: $screen-lg) {
+        text-align: center;
+        margin-bottom: 3.2rem;
+      }
+
+      img {
+        width: 100%;
+      }
+
+      // &_logo {
+      //   margin-bottom: 3.2rem;
+      // }
+
+      // &_social{
+      //   @include flex-center-center;
+      //   width: 24rem;
+
+      //   @media (max-width: $screen-lg) {
+      //     width: 100%;
+      //   }
+
+      //   a {
+      //     margin: 0 .8rem;
+
+      //     svg {
+      //       @include squareSize(3.2rem);
+      //     }
+      //   }
+      // }
+    }
+
+    &_contacts {
+      width: 30rem;
+
+      &_title {
+        font-weight: 700;
+        margin-bottom: .8rem;
+      }
+
+      &_address:last-of-type {
+        margin-bottom: 1.6rem;
+      }
+
+      &_data {
+        @include flex-start-center;
+        margin-bottom: 1rem;
+        color: #000;
+
+        p {
+          font-family: $openSans__typo;
+          margin-left: 1.6rem;
+        }
+      }
+    }
+  }
+
+  &__legals {
+    width: 100%;
+    background: #1D4451;
+    text-align: center;
+    padding: 1.6rem 0;
+    
+    &_link {
+      @include p__small;
+      color: $color__bright;
+      margin: 1.6rem;
+    }
+  }
+}

@@ -1,0 +1,161 @@
+@import '../../assets//scss/abstracts/variables';
+
+.contactForm {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100vh;
+
+  @include flex-center-center;
+  background: rgba(143, 143, 143, .7);
+  z-index: 100;
+
+  @media (max-width: $screen-lg) {
+    overflow-y: auto;
+    align-items: start;
+  }
+
+  &__block {
+    width: 72rem;
+    margin: 2.4rem 0;
+
+    @media (max-width: $screen-lg) {
+      width: 36rem;
+    }
+  }
+
+  &__content {
+    display: flex;
+
+    @media (max-width: $screen-lg) {
+      flex-direction: column;
+    }
+
+    &_left {
+      position: relative;
+      overflow: hidden;
+      width: 50%;
+      background-color: #ebebeb;
+
+      @media (max-width: $screen-lg) {
+        width: 100%;
+      }
+    }
+
+    &_social {
+      @include flex-center-center;
+      padding: 2.4rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);;
+      border-image-slice: 30 30% 45;
+
+      &_link:hover {
+        svg {
+          transform: scale(1.05);
+          fill: $color__cta-primary--hover;
+        }
+      }
+
+      svg {
+        margin: 0 1.2rem;
+        cursor: pointer;
+      }
+    }
+
+    &_title {
+      margin: 2.4rem 2.4rem 0;
+    }
+
+    &_text {
+      margin: 2.4rem;
+    }
+
+    &_link {
+      @include flex-between-center;
+      padding-left: 1.6rem;
+      margin: 0 2.4rem 0;
+      background: $color__bright;
+      @include p__small;
+      color: $color__cta-primary--default;
+
+      @media (max-width: $screen-lg) {
+        margin-bottom: 2.4rem;
+      }
+    }
+
+    &_right {
+      position: relative;
+      overflow: hidden;
+      width: 50%;
+      padding-top: 0;
+      background-color: #ffffff;
+
+      @media (max-width: $screen-lg) {
+        width: 100%;
+      }
+
+      .form {
+        padding: 2.4rem;
+
+        input[type=text],
+        input[type=email],
+        input[type=tel],
+        textarea {
+          width: 100%;
+          height: 6.5rem;
+          border: none;
+          border-bottom: 1px solid $color__cta-primary--default;
+          outline: none;
+          margin-top: 1.6rem;
+          padding: 0;
+          @include font(2rem, 400, 120%);
+
+          @media (max-width: $screen-lg) {
+            margin-top: 1.2rem;
+          }
+
+          &::placeholder {
+            @include font(1.8rem, 400, 135%, rgba(0, 0, 0, 0.32));
+            font-family: $openSans__typo;
+          }
+        }
+
+        .contactForm__content_title {
+          margin: 0;
+        }
+
+        textarea {
+          height: 8.5rem;
+          font-family: $openSans__typo;
+
+          &::placeholder {
+            padding-top: 2rem;
+          }
+        }
+
+        .errors {
+          position: relative;
+          text-align: start;
+          margin-bottom: -1.4rem;
+          @include font(1.4rem, 400, 100%, #D31414);
+        }
+      }
+    }
+  }
+
+  .form_buttons {
+    margin: 1.6rem auto 0;
+
+    @media (max-width: $screen-lg) {
+      margin-top: 1rem;
+    }
+
+    &.button__disabled > a{
+      pointer-events: none;
+      cursor: not-allowed;
+      background: var(--color__cta_50);
+    }
+  }
+}

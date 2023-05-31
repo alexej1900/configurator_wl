@@ -1,0 +1,125 @@
+@import '../../assets//scss/abstracts/variables';
+
+.summary {
+	position: relative;
+	top: 7.5rem;
+
+	&__room {
+		width: 100%;
+		margin-top: 4.8rem;
+
+		&_title {
+			margin: 4.8rem 6.4rem 1.6rem;
+			@include roomTitle;
+
+			@media (max-width: $screen-xl) {
+				margin: 4.8rem 4.8rem 1.6rem;
+			}
+
+			@media (max-width: $screen-lg) {
+				margin: 2.4rem;
+			}
+		}
+
+		&_image {
+			position: relative;
+			width: 100% !important;
+			height: auto !important;
+
+			span {
+				position: relative !important;
+				width: 100% !important;
+
+				span {
+					display: none !important;
+				}
+			}
+
+			img {
+				top: 0 !important;
+				position: relative !important;
+				width: 100% !important;
+				height: auto !important;
+			}
+		}
+
+		&_data {
+			display: flex;
+			// justify-content: center;
+			flex-wrap: wrap;
+			gap: 2.4rem 3.2rem;
+			margin: 0 6.4rem;
+
+			@media (max-width: $screen-xxl) {
+				margin: 0 4.8rem;
+			}
+
+			@media (max-width: $screen-lg) {
+				flex-direction: column;
+				margin: 0 2.4rem;
+			}
+
+			// .fullLine {
+			// 	width: 100%;
+			// 	display: flex;
+
+			// 	@media (max-width: $screen-lg) {
+			// 		flex-direction: column;
+			// 		margin: 0 auto;
+			// 		max-width: 36rem;
+			// 	}
+
+			// 	@media (max-width: $screen-md) {
+			// 		max-width: 31.2rem;
+			// 	}
+			// }
+
+			.halfLine {
+				flex: 0 0 calc(32% - 1.6rem);
+
+				@media (max-width: $screen-xxl) {
+					flex: 0 1 calc(50% - 1.6rem);
+				}
+				// @media (max-width: $screen-xl) {
+				// 	width: 100%;
+				// 	margin: 0 auto;
+				// 	max-width: 36rem;
+				// }
+				@media (max-width: $screen-lg) {
+					max-width: 36rem;
+					// margin: 0 auto;
+				}
+			}
+
+			&_title {
+				@include font(1.6rem, 500, 150%);
+				text-transform: uppercase;
+				margin: 1.6rem 0 1.2rem;
+			}
+		}
+
+		&_card_wrapper {
+			position: relative;
+		}
+
+		&_edit_icon {
+			position: absolute;
+			right: 0;
+			top: 0;
+			@include squareSize(4.4rem);
+			z-index: 10;
+
+			svg {
+				@include squareSize(4.4rem);
+			}
+		}	
+	}
+
+	.title {
+		margin-bottom: 3.2rem;
+	}
+
+	.stats {
+		padding: 1.4rem;
+	} 
+}

@@ -1,0 +1,70 @@
+@import "../../../assets/scss/abstracts/variables";
+
+.btn {
+  position: relative;
+  box-sizing: border-box;
+  @include flex-center-center;
+  @include buttonTitle;
+  padding: 1.2rem 1.6rem;
+  cursor: pointer;
+  // transition: all 0.2s ease-in;
+
+  svg {
+    margin-right: 0.8rem;
+    margin-left: 0;
+    min-width: 1.7rem;
+  }
+
+  &.iconRight svg{
+    margin-right: 0;
+    margin-left: 0.8rem;
+  }
+
+  &.primary {
+    background: $color__cta-primary--default;
+    color: $color__bright;
+
+    &:hover {
+      background: $color__cta-secondary--shade;
+      color: $color__cta-primary--default;
+
+      svg {
+        fill: $color__cta-primary--default;
+      }
+    }
+  }
+
+  &.secondary {
+    background: transparent;
+    color: $color__cta-primary--default;
+    outline: 1px solid $color__cta-primary--default;
+
+    svg {
+      fill: $color__cta-primary--default;
+    }
+
+    &:hover {
+      background: $color__cta-secondary--shade;
+      color: $color__cta-primary--default;
+
+      svg {
+        fill: $color__cta-primary--default;
+      }
+    }
+  }
+
+  &.back {
+    background: rgba($color__cta-primary--hover, 0.72);
+    color: $color__bright;
+    height: 100%;
+
+    &:hover {
+      background: $color__cta-secondary--shade;
+      color: $color__cta-primary--default;
+
+      svg {
+        fill: $color__cta-primary--default;
+      }
+    }
+  }
+}

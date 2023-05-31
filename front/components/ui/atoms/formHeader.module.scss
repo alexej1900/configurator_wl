@@ -1,0 +1,19 @@
+@import "../../../assets/scss/abstracts/variables";
+
+.formHeader {
+  @include flex-between-center;
+  height: 5.6rem;
+  background-color: $color__brand--primary;
+  padding-left: 2.4rem;
+  @include font(2.1rem, 300, 120%, $color__bright);
+
+  &__closeBtn {
+    @include flex-center-center;
+    @include squareSize(5.6rem);
+    cursor: pointer;
+
+    svg {
+      @include squareSize(1.8rem);
+    }
+  }
+}

@@ -1,0 +1,12 @@
+@import '../../../assets/scss/abstracts/variables';
+
+.scroll__icon {
+  position: absolute;
+  @include flex-center-center;
+  bottom: 10rem;
+  left: calc((100% - 520px)/2);
+
+  @media (max-width: $screen-lg) {
+    left: calc((100% - 120px)/2);
+  }
+}

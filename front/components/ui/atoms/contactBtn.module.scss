@@ -1,0 +1,43 @@
+@import "../../../assets/scss/abstracts/variables";
+
+.btn__getContacts {
+  position: relative;
+  @include flex-center-center;
+  height: 4rem;
+  background: $color__cta-primary--default;
+  padding: .8rem 1.6rem .8rem .8rem;
+  @include font(1.4rem, 400, 1.2rem, rgba($color__bright, 0.72));
+  border-radius: 2rem;
+  border: 2px solid rgba($color__bright, 0.72);
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+
+  svg {
+    @include squareSize(2.2rem);
+    fill: rgba($color__bright, 0.72);
+  }
+
+  &_text {
+    margin-left: .8rem;
+  }
+
+  &:hover {
+    background: $color__cta-primary--hover;
+    border-color: $color__bright;
+    color: $color__bright;
+
+    svg {
+      fill: $color__bright;
+    }
+  }
+
+  &.btn__small {
+    width: 4rem;
+    border-radius: 50%;
+    padding: .6rem;
+
+    .btn__getContacts_text {
+      display: none;
+    }
+  }
+}

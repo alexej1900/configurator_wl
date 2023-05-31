@@ -1,0 +1,113 @@
+@import "../../../assets/scss/abstracts/variables";
+
+.button {
+  @include flex-center-center;
+  flex-direction: column;
+  width: 20.8rem;
+
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+
+  &:hover {
+    box-shadow: 0px 0px 10px rgba(0,0,0, 0.04);
+    transform: perspective(500px) scale(1.05) rotateX(0) rotateY(0);
+
+    .button__text {
+      background: $color__cta-primary--hover;
+      font-weight: 900;
+    }
+
+    .button__icon_hoverbg {
+      transform: rotate(45deg) translate(50rem, 0rem);
+      transition: all 1s ease-in-out;
+    }
+
+    svg {
+      fill: $color__cta-primary--hover;
+    }
+
+    @media (max-width: $screen-lg) {
+      transform: perspective(500px) scale(1) rotateX(0) rotateY(0);
+
+      .button__icon {
+        transform: perspective(500px) scale(1.1) rotateX(0) rotateY(0);
+      }
+
+      .button__text {
+        background: rgba(0, 0, 0, 0.04);
+      }
+
+      svg {
+        fill: #fff;
+      }
+    }
+  }
+
+  @media (max-width: $screen-lg) {
+    flex-direction: row;
+    width: 100%;
+    height: 7.7rem;
+    margin: .8rem 0;
+  }
+
+  &__icon {
+    @include flex-center-center;
+    width: 100%;
+    position: relative;
+    padding: 2.4rem 5.6rem;
+    overflow: hidden;
+    background-color:rgba(0, 0, 0, 0.04);
+    transition: all .3s ease-in-out;
+
+    @media (max-width: $screen-lg) {
+      width: auto;
+      padding: 1.6rem;
+      background-color: $color__cta-primary--default;
+    }
+
+    svg {
+      @include squareSize(6.4rem);
+
+      @media (max-width: $screen-lg) {
+        @include squareSize(4.5rem);
+        fill: $color__bright;
+      }
+    }
+
+    &_small {
+      display: none;
+    }
+
+    &_hoverbg {
+      position: absolute;
+      transform: rotate(45deg) translate(-16rem, 0rem);
+      width: 5rem;
+      height: 30rem;
+      background:linear-gradient(90deg, 
+        rgba(255, 255, 255, 0.1), 
+        rgba(255, 255, 255, 0.5) 30%, 
+        rgba(255, 255, 255, 0.9) 50%, 
+        rgba(255, 255, 255, 0.5) 70%, 
+        rgba(255, 255, 255, 0.1) 100%);
+    }
+  }
+
+  &__text {
+    width: 100%;
+    padding: 1.6rem 2.4rem;
+    text-align: center;
+    background: $color__cta-primary--default;
+    
+    @include buttonTitle;
+    color: $color__bright;
+
+    transition: all .3s ease-in-out;
+
+    @media (max-width: $screen-lg) {
+      height: 100%;
+      background: rgba(0, 0, 0, 0.04);
+      padding: 2.8rem 2.4rem;
+      color: $color__cta-primary--default;
+    }
+  }
+}

@@ -1,0 +1,80 @@
+@import "../../../assets/scss/abstracts/variables";
+
+.toggle {
+  display: flex;
+  margin: 0 0 3.2rem;
+
+  .option {
+    @include flex-between-center;
+    flex-direction: column;
+    width: 50%;
+    margin: 2px;
+    padding: 1.6rem 0;
+    background: rgba(0, 0, 0, 0.04);
+    cursor: pointer;
+
+    &.active { 
+      position: relative;
+      background: $color__cta-primary--shade;
+
+      .toggle__title {
+        color: $color__cta-primary--default;
+      }
+
+      svg {
+        fill: $color__cta-primary--default;
+      }
+    }
+
+    &:hover {
+      background: $color__cta-primary--shade;
+
+      .toggle__title {
+        color: $color__cta-primary--default;
+      }
+
+      .toggle__sign {
+        border: 2px solid $color__cta-primary--default;
+      }
+
+      svg {
+        fill: $color__cta-primary--default;
+      }
+    }
+
+    svg {
+      @include squareSize(6.4rem);
+      fill: rgba(0, 0, 0, 0.56);
+    }
+  }
+
+  &__title {
+    display: block;
+    width: 100%;
+    @include font(1.8rem, 400, 120%, #6b6b6b);
+    text-align: center;
+    margin: 1.2rem 0;
+  }  
+
+  &__sign {
+    @include flex-center-center;
+    @include squareSize(2rem);
+    border-radius: 50%;
+    border: 2px solid #6b6b6b;
+
+    .toggle__point {
+      @include squareSize(1.4rem);
+      border-radius: 50%;
+      background: $color__cta-primary--default;
+      display: none;
+    }
+
+    &_active {
+      border: 2px solid $color__cta-primary--default;
+
+      .toggle__point {
+        display: block;
+      }
+    }
+  }
+}

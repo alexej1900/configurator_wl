@@ -1,0 +1,24 @@
+@import '../../assets/scss/abstracts/variables';
+
+.style__button {
+  display: none;
+
+  @media (max-width: $screen-lg) {
+    @include flex-center-center;
+    position: absolute;
+    bottom: 0;
+    left: calc((100% - 36rem)/2);
+    width: 100%;
+    max-width: 36rem;
+    // height: 4.8rem;
+    background: $color__bright;
+  }
+
+  .btn__next {
+    flex: 1 0 45%;
+    
+    svg {
+      transform: rotate(180deg);
+    }
+  }
+}

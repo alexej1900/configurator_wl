@@ -1,0 +1,104 @@
+@import '../abstracts/variables';
+
+
+// typography
+
+@font-face {font-family: "Abel"; 
+  src: url("/fonts/Abel-Regular.ttf") format("opentype"); 
+}
+
+@font-face {font-family: "Karla"; 
+  src: url("/fonts/Karla-Regular.ttf") format("opentype"); 
+}
+
+@font-face {font-family: "NNNouvelleGroteskSTD"; 
+  src: url("/fonts/NNNouvelleGroteskSTD-Normal.otf") format("opentype"); 
+}
+
+@font-face {font-family: "Nationale"; 
+  src: url("/fonts/Nationale-Regular.otf") format("opentype"); 
+}
+
+body {
+  font-family: "NNNouvelleGroteskSTD", 'Open Sans', 'Nationale', 'Abel', 'Karla', 'Arial', 'Administer AT Light', Helvetica, neue-haas-unica,  sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 120%;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: $primary__typo;
+  font-weight: 700;
+  font-style: normal;
+  text-rendering: auto;
+  line-height: 120%;
+}
+
+div {
+  font-family: $primary__typo;
+}
+
+h1 {
+  font-size: 3.2rem;
+
+  @media (max-width: $screen-lg) {
+    font-size: 2.8rem;
+  }
+}
+
+h2 {
+  font-size: 3.6rem;
+  font-family: $openSans__typo;
+
+  @media (max-width: $screen-lg) {
+    font-size: 2.4rem;
+  }
+}
+
+h3 {
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+
+h4 {
+  font-size: 2.0rem;
+  font-family: $openSans__typo;
+
+  @media (max-width: $screen-lg) {
+    font-size: 1.8rem;
+  }
+}
+
+p {
+  @include font(1.8rem, 400, 135%);
+  font-family: $primary__typo;
+
+  @media (max-width: $screen-lg) {
+    font-size: 1.6rem;
+  }
+}
+
+input,
+textarea {
+  @include font(1.8rem, 400, 135%);
+}
+
+strong {
+  font-weight: 700;
+}

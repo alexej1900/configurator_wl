@@ -1,0 +1,80 @@
+@import '../../../assets/scss/abstracts/variables';
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  @include flex-center-center;
+  @include squareSize(100%);
+  background: rgba(143, 143, 143, .7);
+  z-index: 100;
+
+  &.show {
+    display: block;
+  }
+
+  &__form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 50%;
+    min-height: 50%;
+    padding: 4rem;
+    background-color: var(--color__secondary);
+
+    @media (max-width: $screen-lg) {
+      width: 70%;
+    }
+
+    &_closeBtn {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      @include flex-center-center;
+      @include squareSize(4rem);
+      align-self: flex-end;
+      cursor: pointer;
+
+      svg {
+        @include squareSize(1.8rem);
+      }
+    }
+
+    &_description {
+      width: 100%;
+      @include font(1.6rem, 600, 2rem);
+      text-align: center;
+    }
+
+    &_buttons {
+      @include flex-center-center;
+
+      @media (max-width: 1200px) {
+        flex-direction: column;
+      }
+    }
+
+    &_button {
+      width: 26rem;
+      margin: 2rem;
+      padding: 1.4rem;
+      background: var(--color__primary);
+      @include font(1.6rem, 600, 2rem, $color__brigh);
+      text-align: center;
+      border: none;
+      cursor: pointer;
+
+      @media (max-width: $screen-lg) {
+        width: 100%;
+      }
+
+      &.button__confirm {
+        background: var(--color__cta);
+      }
+    }
+  }
+}

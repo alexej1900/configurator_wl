@@ -1,0 +1,66 @@
+@import '../../../assets/scss/abstracts/variables';
+
+.infoBox {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-80%);
+    bottom: 2.4rem;
+    max-width: 66rem;
+    width: 100%;
+    // height: 9rem;
+    background: rgba($color__bright, 0.8);
+    padding: 2.4rem;
+    overflow: hidden;
+    transition: .25s height ease-in;
+
+    @media (max-width: 1300px) {
+      width: calc((100% - 60rem));
+      // height: 4.8rem;
+      transform: translateX(-87%);
+      padding: 1.6rem 2.4rem;
+    }
+
+    @media (max-width: 1000px) {
+      width: calc((100% - 52rem));
+      transform: translateX(0);
+      left: 5%;
+    }
+
+    @media (max-width: $screen-lg) {
+      bottom: 6.8rem;
+      left: calc((100% - 36rem)/2);
+      width: 100%;
+      max-width: 36rem;
+      padding: 1.6rem 2.4rem;
+    }
+
+    .close{ 
+      margin-left: auto;
+      cursor: pointer;
+    }
+
+    .text_block {
+      display: flex;
+
+      &__title {
+        @include roomTitle;
+      }
+    }
+  
+    .text_block__text {
+      margin-top: 1.6rem;
+    }
+  
+    &.open {
+      height: auto;
+    }
+  
+    &.closed {
+      height: auto;
+  
+      .text_block__text {
+        display: none;
+      }
+    }
+  }
+  

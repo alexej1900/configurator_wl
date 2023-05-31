@@ -1,0 +1,197 @@
+@import '../assets/scss/abstracts/variables';
+
+.type__wrapper {
+  position: relative;
+  overflow: hidden;
+
+  @media (max-width: $screen-lg) {
+    display: flex;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+  }
+}
+
+.image {
+  transition: all 0.3s ease-in-out;
+
+  &__main {
+    height: 100vh;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  &__wrapper {
+    position: relative;
+    width: calc(100vw - 5.6rem);
+    width: 100vw;
+    opacity: 1;
+
+    @media (max-width: $screen-lg) {
+      width: 100%;
+    }    
+  }
+
+  &__wrapperActive {
+    overflow: scroll;
+    width: calc(100% - 420px);
+
+    position: relative;
+    display: block;
+    cursor: grab;
+    transition: all 0.3s ease-in;
+    flex: 0 0 100%;
+    
+    @media (max-width: $screen-lg) {
+      width: 100%;
+    }
+  }
+
+  &--centered {
+    position: absolute;
+    bottom: 0;
+    left: calc(50% - 12rem);
+    transform: translateX(-50%);
+    transition: all 0.3s ease-in-out;
+  }
+}
+
+.full {
+  object-position: center;
+  transition: all 0.3s ease-in-out;
+
+  @media (max-width: 1500px) { // 1500 = width of big image in px
+    min-width: 1500px !important;
+    object-position: center;
+  }
+
+  img {
+    width: auto !important;
+    height: 100vh !important;
+    object-fit: cover;
+    transition: all 0.3s ease-in-out;
+
+    object-position: center;
+    // &.animate {
+    //   animation-name: moving;
+    //   animation-duration: 3s;
+    //   animation-timing-function: ease-in-out;
+    // }
+
+    @media (max-width: 1500px) { // 1500 = width of big image in px
+      min-width: 1500px !important;
+    }
+  }
+
+  &.blur {
+    img {
+      filter: blur(.3rem);
+    }
+  }
+}
+
+.image__container {
+  position: relative;
+}
+
+.image__wrapper.animate {
+  animation-name: showing;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
+}
+
+.btn__getContacts {
+  position: absolute;
+  bottom: 4rem;
+  right: 12rem;
+  transition: all 0.3s ease-in-out;
+
+  &_shift {
+    right: 50rem;
+
+    @media (max-width: $screen-lg) {
+      // right: 2rem;
+      // bottom: 8rem;
+      display: none;
+    }
+  }
+}
+
+.btn__pinsHide {
+  position: absolute;
+  bottom: 4rem;
+  right: 26rem;
+
+  @include flex-center-center;
+  @include squareSize(4rem);
+  border-radius: 50%;
+  margin: 0;
+  background: $color__cta-primary--default;
+  border: 2px solid rgba($color__bright, 0.72);
+
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  @media (max-width: $screen-lg) {
+    display: none;
+  }
+
+  svg {
+    @include squareSize(2.6rem);
+    fill: rgba($color__bright, 0.72);
+  }
+
+  &_shift {
+    right: 64rem;
+
+    @media (max-width: $screen-lg) {
+      right: 16rem;
+      bottom: 8rem;
+    }
+  }
+
+  &:hover {
+    background: $color__cta-primary--hover;
+    border-color: $color__bright;
+
+    svg {
+      fill: $color__bright;
+    }
+  }
+}
+
+@keyframes showing {
+  from {
+    opacity: 0.5;
+    left: 100%;
+  }
+
+  to {
+    opacity: 1;
+    left: 0;
+  }
+}
+
+@keyframes moving {
+  from {
+    transform: translateX(100%);
+  }
+
+  // 25% {
+  //     left: -60rem;
+  // }
+
+  50% {
+    transform: translateX(-30%);
+
+  }
+
+  // 75% {
+  //   left: -21rem;
+  // }
+
+  to {
+    transform: translateX(0);
+  }
+}

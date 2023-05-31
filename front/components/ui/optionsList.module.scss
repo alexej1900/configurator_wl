@@ -1,0 +1,188 @@
+@import '../../assets/scss/abstracts/variables';
+
+.radio {
+	background: $color__bright;
+	margin-bottom: .8rem;
+
+	input[type="radio"] {
+		@include squareSize(2rem);
+		filter: hue-rotate(108deg) grayscale(0.4);
+		// accent-color: var(--color__secondary);
+		cursor: pointer;
+	}
+	
+	label {
+		cursor: pointer;
+	}
+
+	.option__input {
+		@include flex-center-center;
+		flex-direction: column;
+
+		&.active {
+			background: red;
+		}
+	}
+
+	.option__size {
+		font-weight: 800;
+	}
+
+	.option__description {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+
+		label {
+			@include font(1.5rem, 600, 1.8rem);
+		}
+
+		h5 {
+			@include font(1.6rem, 400, 1.8rem);
+		}
+	}
+
+	.option__price {
+		display: flex;
+		align-items: center;
+		border-left: 2px solid $color__grey--6;
+		margin: 0!important;
+		padding: .5rem;
+
+		span {
+			@include font(1.5rem, 400, 1.8rem);
+		}
+	}
+
+	&.final {
+		background-color: var(--color__primary_10);
+		
+		.option__price {
+			border-left: 2px solid $color__bright;
+		}
+	}
+}
+
+.optionWrapper {
+	min-height: opx;
+
+	&.collapsed {
+		height: 0px;
+		overflow: hidden;
+	}
+}
+
+.optionHeader {
+	@include flex-center-center;
+	margin-bottom: 5px;
+}
+
+.optionTitle {
+  text-align: center;
+}
+
+.optionsList {
+	max-height: 200rem;
+	transition: all 0.4s ease-in-out;
+
+	&.collapsed {
+		overflow: hidden;
+		max-height: 0px;
+		transition: all 0.4s ease-in-out;
+	}
+}
+
+.radio input[type=checkbox]{
+	@include squareSize(0);
+	visibility: hidden;
+}
+
+.arrow {
+	cursor: pointer;
+
+	&:before {
+		content: '';
+		display: inline-block;
+		@include squareSize(1rem);
+		position: relative;
+		vertical-align: middle;
+		margin-right: 1.6rem;
+		border-style: solid;
+		border-width: 3px 3px 0 0;
+		transform: rotate(-45deg);
+	}
+
+	&.rotate {
+		&:before {
+			transform: rotate(-225deg);
+		}
+	}
+}
+
+.toggle {
+	display: flex;
+	justify-content: space-between;
+
+	label {
+		cursor: pointer;
+		text-indent: -9999px;
+		width: 6.4rem;
+		height: 3.2rem;
+		background: rgba($color__dark, 0.1);
+		display: block;
+		border-radius: 100px;
+		position: relative;
+
+		&:after {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			@include squareSize(3.2rem);
+			background: rgba($color__dark, 0.38);
+			border-radius: 90px;
+			transition: 0.3s;
+		}
+		&:before {
+			opacity: 0;
+		}
+	}
+}
+
+.radio input:checked + label {
+	&:after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		@include squareSize(3.2rem);
+		background: $color__accent;
+		border-radius: 90px;
+		transition: 0.3s;
+  }
+
+	&:before {
+		content: '';
+		background-image: url('/check.svg');
+		display: inline-block;
+		position: absolute;
+		@include squareSize(2.4rem);
+		background-repeat: no-repeat;
+		fill: white;
+		margin-right: 1rem;
+		top: 3px;
+		right: -6px;
+		z-index: 123;
+		opacity: 1;
+		transition: 0.15s opacity ease-in;
+	}
+}
+
+.radio input:checked + label:after {
+	left: 100%;
+	transform: translateX(-100%);
+}
+
+.radio label:active:after {
+	width: 130px;
+}

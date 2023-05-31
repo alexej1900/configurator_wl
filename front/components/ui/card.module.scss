@@ -1,0 +1,242 @@
+@import '../../assets//scss/abstracts/variables';
+
+.styleCard {
+  position: relative;
+  margin: 0 auto 1.6rem;
+  width: 100%;
+  cursor: pointer;
+
+  // @media (max-width: $screen-lg) {
+  //   height: calc((100vh - 8rem - 5rem)/4);  //Last number depends on amount of style lines
+  // }
+
+  &:hover {
+    .img__wrapper1 {
+      overflow: hidden;
+      border: 4px solid $color__cta-primary--active;
+      margin-bottom: -2px;
+      margin-top: -2px;
+    }
+  }
+
+  .card__title {
+    padding: .8rem 1.2rem;
+    @include optionTitle;
+
+    @media (max-width: $screen-lg) {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      margin: 0;
+      padding: .8rem 2.4rem;
+      background: rgba($color__bright, 0.8);
+      z-index: 1;
+    }
+  }
+
+  .img__wrapper1 {
+    position: relative;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__active {
+
+    &:hover {
+      .img__wrapper1 {
+        margin-bottom: 0;
+        margin-top: 0;
+      }
+    }
+
+    .img__wrapper1 {
+      border: 4px solid $color__cta-primary--active;
+      
+      @media (max-width: $screen-lg) {
+        border: none;
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: -1px;
+        right: -1px;
+        @include squareSize(.4rem);
+        background-color:  $color__cta-primary--active;
+        z-index: 1;
+
+        @media (max-width: $screen-lg) {
+          display: none;
+        }
+      }
+  
+      .check__wrapper {
+        position: absolute;
+        top: -.4rem;
+        right: -.4rem;
+        @include flex-center-center;
+        padding: 1.2rem 1.6rem;
+        background-color:  $color__cta-primary--active;
+        z-index: 10;
+
+        svg {
+          @include squareSize(1.8rem);
+        }
+
+        @media (max-width: $screen-lg) {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.card {
+  
+  &.small {
+    display: flex;
+    height: 10rem;
+    margin-bottom: 0.8rem;
+    background: rgba($color__bright, 0.8);
+
+    &:hover {
+      background: $color__cta-primary--shade;
+      cursor: pointer;
+
+      svg {
+        fill: $color__cta-primary--default;
+      }
+    }
+
+    .image__wrapper {
+      @include flex-center-center;
+      width: 12.5rem;
+      margin: 0.4rem;
+
+      span {
+        height: 9.4rem !important;
+        width: 12.5rem !important;
+
+        span {
+          display: none !important;
+        }
+      }
+
+      img {
+        object-fit: cover;
+      }
+    }
+    
+    .text__wrapper {
+      width: 66%;
+      margin: 0.8rem 0 0.8rem 1rem;
+
+      svg {
+        position: absolute;
+        top: 0.4rem;
+        right: .5rem;
+        @include squareSize(1.8rem);
+      }
+
+      .card__title {
+        display: block;
+        max-width: calc(100% - 4.4rem);
+        margin: 0 0 .6rem;
+        @include optionTitle;
+      }
+
+      .card__description {
+        @include flex-start-center;
+        margin: 0 0 .6rem;
+        @include description;
+        max-width: calc(100% - 4.4rem);
+
+        @media (max-width: $screen-md) {
+          font-size: 1.4rem;
+        }
+
+        .card__index {
+          margin-right: .4rem;
+          @include font(1.2rem, 400, 100%);
+        }
+      }
+    }
+
+    &.active {
+      background-color: $color__cta-primary--active;
+      cursor: default;
+
+      .card__title,
+      .card__description,
+      .card__description > .card__index {
+        color: $color__bright;
+      }
+
+      svg {
+        fill: $color__bright;
+      }
+
+      &:not(.collapsed) {
+        pointer-events: none;
+      }
+    }
+
+    &.disable {
+      display: none;
+    }
+
+    &.collapsed {
+      background-color: rgba(0, 0, 0, 0.04);
+      height: 7rem;
+      cursor: pointer;
+
+      .text__wrapper {
+        .card__title,
+        .card__description {
+          color: $color__dark;
+        }
+
+        svg {
+          fill: rgba(0, 0, 0, 0.16);
+        }
+      }
+
+      .image__wrapper {
+
+        span {
+          height: 6.25rem !important;
+          width: 12.5rem !important;
+        }
+
+        img {
+          object-fit: cover;
+        }
+      }
+    }
+
+    &.final {
+
+      background-color: var(--color__primary_10); 
+      margin: 0;
+      padding: 0 0.4rem;
+      height: 11rem;
+      max-height: none;
+
+      .image__wrapper {
+        @include squareSize(11rem);
+        margin: 0;
+        width: 12.5rem !important;
+
+        span {
+          height: 10rem !important;
+          width: 12.5rem !important;
+        }
+
+        // img {
+        //   height: 10rem !important;
+        // }
+      }
+    }
+  }
+}
