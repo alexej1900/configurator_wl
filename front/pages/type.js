@@ -95,7 +95,7 @@ export default function Type() {
                 styleId={styleId} 
                 activeStyle={(id) => changeStyle(id)} 
                 apartmentPrice = {apartSize.price} 
-                title="Wohnzimmer" 
+                title="STIL" 
                 styleCards={data.entry.styles} 
                 styleTypeSet={setStyleTypeHandle} 
                 currentRoom={'type'}

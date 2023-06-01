@@ -83,35 +83,6 @@ query MyQuery($id: [String], $var: [String]) {
             width
             height
           }
-          additionalLivingRoomPrice
-          additionalClosetPrice
-          additionRoomCloset
-          additionCorridorCloset
-          ankleideschrank
-          bath1FurniturePrice
-          bath1Lavabo2Price
-          bath1MirrorClosetPrice
-          bath1PlatePrice
-          bath1ShiftDoorPrice
-          bedroomClosetPrice
-          buildingsName
-          dusheFurniture2Price
-          dusheFurniture3Price
-          dusheFurniture4Price
-          dusheMirrorClosetPrice
-          dushePlatePrice
-          kitchen1Opt2Price
-          kitchen1Opt3Price
-          kitchen2Back2Price
-          kitchen2Front2Price
-          kitchen2Front3Price
-          kitchen2Price
-          livingRoomDoorPrice
-          livingRoomOpt2Price
-          livingRoomOpt3Price
-          roomsCount
-          additionalCloset
-          additionalSleeproomCloset
           boden
           boden2
           boden3
@@ -161,8 +132,11 @@ query MyQuery($id: [String], $var: [String]) {
           weiterzimmerschrank
           weiterzimmerschrank2
           wohnenschrank
+          wohnenschrank2
           flurschrank
           flurschrank2
+          ankleideschrank
+          ankleideschrank2
         }
       }
     }

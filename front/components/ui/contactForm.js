@@ -79,7 +79,7 @@ export default function ContactForm({ onCancel, pdfUrl }) {
     }).then((data) => console.log('data', data))
       .catch((error) => console.error(error));
     
-    await fetch('https://ah.immokonfigurator.ch/mail', {
+    await fetch('https://staging.immokonfigurator.ch/mail', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',

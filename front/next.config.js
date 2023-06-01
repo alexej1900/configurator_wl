@@ -2,7 +2,7 @@ module.exports = {
   distDir: 'build',
   reactStrictMode: true,
   images: {
-    domains: ['Konfigurator', 'ah.immokonfigurator.ch'],
+    domains: ['Konfigurator', 'staging.immokonfigurator.ch']
   },
   webpack(config) {
     config.module.rules.push({

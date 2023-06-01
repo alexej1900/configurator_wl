@@ -10,16 +10,10 @@ import styles from './sidebar.module.scss';
 export default function SidebarButtons({ currentRoom, styleTypeSet, roomId, showArrow }) {
 	const dispatch = useDispatch();
 
-	const { roomsTitle, roomsSlug } = useSelector((state) => state.generalStates);
+	const { roomsTitle, roomsSlug, rooms } = useSelector((state) => state.generalStates);
 	const { apartStyle, apartSize } = useSelector(state => state);
 	const [buttonHeight, setButtonHeight] = useState('');
 	// const [secondButtonHeight, setSecondButtonHeight] = useState('');
-// let buttonHeight;
-// let secondButtonHeight;
-// buttonHeight = document.getElementById('hook1')?.clientHeight;
-	// if (document.getElementById('hook3')?.clientHeight > document.getElementById('hook1')?.clientHeight) {
-	// 	secondButtonHeight = document.getElementById('hook3')?.clientHeight
-	// } 
 
 	useEffect(() => {
 		setButtonHeight(document.getElementById('hook1')?.clientHeight);
@@ -27,45 +21,24 @@ export default function SidebarButtons({ currentRoom, styleTypeSet, roomId, show
 		// if (document.getElementById('hook3')?.clientHeight > document.getElementById('hook1')?.clientHeight) {
 		// 	setSecondButtonHeight(document.getElementById('hook3')?.clientHeight);
 		// } 
-		// console.log('buttonHeight1111', buttonHeight)
+
   }, [currentRoom]);
 
 	// console.log('buttonHeight', buttonHeight)
 
 	let nextLink, prevLink;
 
-	if (currentRoom === 'kitchen-type') {
-		nextLink = {link: `/küche${apartStyle.kitchenStyle + 1}`, title: `Linie ${apartStyle.kitchenStyle + 1}`}
-		prevLink = '/wohnzimmer';
-	} else if (currentRoom.slice(0, -1) === 'küche') {
-		nextLink = apartSize.badewanne ? {link:  `/badezimmer`, title: `Badezimmer mit Badewanne`} : {link:  `/dusche`, title: `Badezimmer mit Dusche`}
-		prevLink = '/kitchen-type';
+	if (currentRoom === 'type') {
+		nextLink = {link: `/${rooms[0].toLowerCase()}`, title: rooms[0], icon: 'nextRoom'};
+		prevLink = '/';
 	} else {
-		for (let i = 0; i < roomsTitle.length; i++) {   
-			if (roomsSlug[i].toLowerCase() === currentRoom) {
+		for (let i = 0; i < rooms.length; i++) {   
+			if (rooms[i].toLowerCase() === currentRoom) {
+				nextLink = rooms[i+1] 
+					?  {link: `/${rooms[i+1].toLowerCase()}`, title: rooms[i+1], icon: 'nextRoom'}
+					:  {link: '/summary', title: 'Abschliessen', icon: 'checkIcon'};
 
-				nextLink = roomsTitle[i+1] 
-					?  {link: `/${roomsSlug[i+1].toLowerCase()}`, title: roomsTitle[i+1]}
-					:  {link: '/summary', title: 'Fertigstellen'};
-
-				switch (currentRoom.toLowerCase()) {
-					case 'badezimmer':
-						nextLink = apartSize.dusche ? {link:  `/dusche`, title: `Badezimmer mit Dusche`} : {link:  `/schlafzimmer`, title: `Schlafzimmer`}
-						prevLink = `/kitchen-type`;
-						break;
-					case 'dusche':
-						prevLink = apartSize.badewanne ? `/badezimmer` : `/kitchen-type`;
-						break;
-					case 'schlafzimmer':
-						prevLink = apartSize.dusche ? `/dusche` : `/badezimmer`;
-						break;
-					case 'wohnzimmer':
-						nextLink = {link: `/kitchen-type`, title: 'Küchendesign'}
-						prevLink = `/?id=${roomId}`;
-						break;
-					default:
-						prevLink = roomsSlug[i-1] ? roomsSlug[i-1].toLowerCase() : '/type';
-				}
+				prevLink = rooms[i-1] ? rooms[i-1].toLowerCase() : isStylePageExist ? '/type' : '/';
 			}
 		}
 	}

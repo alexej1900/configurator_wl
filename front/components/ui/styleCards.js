@@ -8,10 +8,10 @@ export default function StyleCards({activeStyle, cardData, styleId}) {
 
   return (
     <div >
-      <InfoTitle 
+      {/* <InfoTitle 
         title={'Linie 1'}
         infoText={'Style description, style description, style description, style description, style description, style description, style description.'}
-      />
+      /> */}
 
       <div className={styles.block__wrapper}>
         {cardData.map((data, index)=>{
@@ -30,12 +30,12 @@ export default function StyleCards({activeStyle, cardData, styleId}) {
         })}
       </div>
 
-      <InfoTitle 
+      {/* <InfoTitle 
         title={'Linie 2'}
         infoText={'Style description, style description, style description, style description, style description, style description, style description.'}
-      />
+      /> */}
 
-      <div className={`${styles.block__wrapper} ${styles.block__wrapper_even}`}>
+      {/* <div className={`${styles.block__wrapper} ${styles.block__wrapper_even}`}>
         {cardData.map((data, index)=>{
 
           if (index >= 2) {
@@ -51,7 +51,7 @@ export default function StyleCards({activeStyle, cardData, styleId}) {
             />
           )}
         })}
-      </div>
+      </div> */}
     </div>
   )
 }

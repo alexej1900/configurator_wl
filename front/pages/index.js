@@ -52,11 +52,12 @@ export default function Home() {
   const { data, error, loading } = useQuery(apartmentItem, {
     variables: { id: queryId ? queryId : 'K-01.01', var: queryId ? queryId + 'var2' : 'K-01.01var2' },
   });
+  
   if (loading) return <LoadingSpinner full={true}/>;
   if(error) return <p> Error</p>;
-  
+  console.log(data.entry.dataList[0])
   const aparmentData = data.entry.dataList[0];
-// console.log(aparmentData)
+
   let apartmentImage = aparmentData?.apartmentImage[0];
 
   const onCancel = () => {
@@ -101,7 +102,7 @@ export default function Home() {
         <div className={`${styles.submitBtn}`} 
             onClick={() => dispatch(changeApartData(aparmentData, apartmentImage, aparmentData.basePrice))}
           >              
-            <Button title="Zum Konfigurator"  href={"/wohnzimmer"} type="primary" iconName="entry" iconColor="#fff"/>
+            <Button title="Zum Konfigurator"  href={"/type"} type="primary" iconName="entry" iconColor="#fff"/>
           </div>
         <div className={`${styles.btn__getContacts}`} onClick={() => setIsPopup(true)}>
             <ContactBtn/>
