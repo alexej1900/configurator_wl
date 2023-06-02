@@ -18,8 +18,10 @@ export default function Header () {
   const dispatch = useDispatch();
   const { pathname, query } = useRouter();
 
-  const { menu, open, pinStatus } = useSelector((state) => state.generalStates);
+  const { menu, open, pinStatus, logo } = useSelector((state) => state.generalStates);
   const apartSize = useSelector((state) => state.apartSize);
+
+  // console.log(logo)
   
   const rooms = [
     'Wohnzimmer', 
@@ -49,9 +51,12 @@ export default function Header () {
   return (
     <header className={[style.header, open & pathname !== '/' && style.compressed, (pathname === '/'|| pathname === '/summary') && style.shifted, menu && style.background].join(' ')}>
       <div className={style.header__wrapper}>
-        <a href={pathname !== '/' ? `/?id=${apartSize.apartmentId}` : null}>
-          <img className={style.logo} src={'./AH_Header_Logo.svg'} alt="Logo"/>
-        </a>
+        {logo && 
+          <a href={pathname !== '/' ? `/?id=${apartSize.apartmentId}` : null}>
+            <img className={style.logo} src={logo} alt="Logo"/>
+          </a>
+        }
+       
         <div className={style.header__buttons}>
           {pathname !== '/' && pathname !== '/summary' && !menu &&
             <Link href='/summary'>

@@ -6,50 +6,29 @@ import { changeRoomVisibility, changeStyleVisibility } from '../../../redux/acti
 import Button from '../atoms/button';
 
 import styles from './sidebar.module.scss';
+import getNavButtonsLinks from '../../../pages/api/getNavButtonsLinks';
 
 export default function SidebarButtons({ currentRoom, styleTypeSet, roomId, showArrow }) {
 	const dispatch = useDispatch();
 
-	const { roomsTitle, roomsSlug, rooms } = useSelector((state) => state.generalStates);
+	const { roomsTitle, roomsSlug } = useSelector((state) => state.generalStates);
 	const { apartStyle, apartSize } = useSelector(state => state);
 	const [buttonHeight, setButtonHeight] = useState('');
 	// const [secondButtonHeight, setSecondButtonHeight] = useState('');
-
+	// console.log('rooms', roomsTitle, roomsSlug)
 	useEffect(() => {
 		setButtonHeight(document.getElementById('hook1')?.clientHeight);
-
-		// if (document.getElementById('hook3')?.clientHeight > document.getElementById('hook1')?.clientHeight) {
-		// 	setSecondButtonHeight(document.getElementById('hook3')?.clientHeight);
-		// } 
-
   }, [currentRoom]);
 
-	// console.log('buttonHeight', buttonHeight)
+	const { nextLink, prevLink } = getNavButtonsLinks(currentRoom);
 
-	let nextLink, prevLink;
-
-	if (currentRoom === 'type') {
-		nextLink = {link: `/${rooms[0].toLowerCase()}`, title: rooms[0], icon: 'nextRoom'};
-		prevLink = '/';
-	} else {
-		for (let i = 0; i < rooms.length; i++) {   
-			if (rooms[i].toLowerCase() === currentRoom) {
-				nextLink = rooms[i+1] 
-					?  {link: `/${rooms[i+1].toLowerCase()}`, title: rooms[i+1], icon: 'nextRoom'}
-					:  {link: '/summary', title: 'Abschliessen', icon: 'checkIcon'};
-
-				prevLink = rooms[i-1] ? rooms[i-1].toLowerCase() : isStylePageExist ? '/type' : '/';
-			}
-		}
-	}
-	
 	const showRoomClick = () => {
 		dispatch(changeRoomVisibility(true))
 		dispatch(changeStyleVisibility(true));
 	}
 			
 	return (
-		<div className={`${styles.sidebar__button} ${currentRoom === 'kitchen-type' && styles.sidebar__typeRoomButtons}`}>
+		<div className={`${styles.sidebar__button} ${currentRoom === 'type' && styles.sidebar__typeRoomButtons}`}>
 			{showArrow 
 				? <div className={`${styles.button_down}`}></div>
 				: null 
@@ -78,12 +57,12 @@ export default function SidebarButtons({ currentRoom, styleTypeSet, roomId, show
 							/>
 					</div>
 
-					<div className={`${styles.btn__primary} ${currentRoom !== 'kitchen-type' && styles.btn__next}`} id="hook1">
+					<div className={`${styles.btn__primary} ${currentRoom !== 'type' && styles.btn__next}`} id="hook1">
 						<Button 
-							title={currentRoom === 'kitchen-type' ? 'Wahl bestätigen' : nextLink.title}
+							title={currentRoom === 'type' ? 'Wahl bestätigen' : nextLink.title}
 							href={nextLink.link}
 							type="primary" 
-							iconName={currentRoom === 'kitchen-type' ? 'confirm' : currentRoom === 'schlafzimmer' ? 'summary' :'arrow-right'} 
+							iconName={currentRoom === 'type' ? 'confirm' : currentRoom === 'schlafzimmer' ? 'summary' :'arrow-right'} 
 							iconColor="#fff" 
 							iconRight={currentRoom === 'schlafzimmer' ? false : true }
 							clickFn={styleTypeSet}

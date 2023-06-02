@@ -1,11 +1,11 @@
 {
   "require": {
-    "craftcms/cms": "^3.7.26",
-    "craftcms/contact-form": "2.5.1",
-    "craftcms/feed-me": "4.5.4",
-    "craftcms/redactor": "2.10.11",
+    "craftcms/cms": "^3.8.13",
+    "craftcms/contact-form": "2.5.2",
+    "craftcms/feed-me": "4.6.3.1",
+    "craftcms/redactor": "2.10.12",
     "hybridinteractive/craft-contact-form-extensions": "1.3.2",
-    "verbb/super-table": "2.7.4",
+    "verbb/super-table": "2.7.5.1",
     "vlucas/phpdotenv": "^5.4.0"
   },
   "require-dev": {

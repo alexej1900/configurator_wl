@@ -39,7 +39,7 @@ export default function Sidebar({
 	const { showStyle } = useSelector(state => state.generalStates);
 
 	const roomType = useSelector(state => state.roomType);
-	// console.log('roomType', roomType)
+	console.log('modifyData', modifyData)
 
 	// =============== if we have main style lines decomment 1 line below ===============
 	// const mainStyle = useSelector(state => state.apartStyle).title;
@@ -92,6 +92,7 @@ export default function Sidebar({
 				// item.modificationMainStyle.toLowerCase() === "false")
 				) {
 				const modName = item.modificationName;
+				// const modName = item.modificationIndex;
 
 				// const modName = item.modificationIndex;  !!!! ToDo connect name to indexName -> change dispatching to redux IndexName {optName ...}
 				

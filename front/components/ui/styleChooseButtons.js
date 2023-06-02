@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { changeStyleVisibility} from '/redux/actions/index';
 
+import getNavButtonsLinks from '../../pages/api/getNavButtonsLinks';
+
 import Button from './atoms/button';
 
 import styles from './styleChooseButtons.module.scss';
@@ -14,7 +16,7 @@ export default function StyleChooseButtons({room, styleTypeSet, activeStyle, sty
 	const [buttonHeight, setButtonHeight] = useState('');
 
 
-	const { roomsTitle, roomsSlug, rooms } = useSelector((state) => state.generalStates);
+	const { roomsTitle, roomsSlug } = useSelector((state) => state.generalStates);
 	const { apartSize } = useSelector(state => state);
 	const apartStyle = useSelector((state) => state.apartStyle);
 	const roomId = useSelector(state => state.apartSize.apartmentId);
@@ -26,23 +28,8 @@ export default function StyleChooseButtons({room, styleTypeSet, activeStyle, sty
 	useEffect(() => {
 		setButtonHeight(document.getElementById('hook2')?.clientHeight)
   }, [room]);
-	
-	let nextLink, prevLink;
 
-	if (room === 'type') {
-		nextLink = {link: '/'+rooms[0].toLowerCase(), title: rooms[0], icon: 'nextRoom'};
-		prevLink = '/';
-	} else {
-		for (let i = 0; i < rooms.length; i++) {   
-			if (rooms[i].toLowerCase() === room) {
-				nextLink = rooms[i+1] 
-					?  {link: '/'+rooms[i+1].toLowerCase(), title: rooms[i+1], icon: 'nextRoom'}
-					:  {link: '/summary', title: 'Abschliessen', icon: 'checkIcon'};
-
-				prevLink = rooms[i-1] ? rooms[i-1].toLowerCase() : '/type';
-			}
-		}
-	}
+	const { nextLink, prevLink } = getNavButtonsLinks(room);
 
 	const changeStyle = () => {
 		activeStyle(++currentStyleId%stylesAmount);  //Last number depends on amount of style lines

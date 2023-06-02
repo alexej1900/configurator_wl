@@ -21,7 +21,6 @@ import { changeApartSize, setBrandSettings, setRooms, changeApartData, resetStat
 import styles from './_welcome.module.scss';
 
 export default function Home() {
-  const [isBaseVersion, setIsBaseVersion] = useState(true);
   const [isPopup, setIsPopup] = useState(false);
   const [isModal, setIsModal] = useState(localStorage.getItem('persist:root') && JSON.parse(localStorage.getItem('persist:root')).roomType.length > 5);
 
@@ -31,6 +30,7 @@ export default function Home() {
   const queryId = router.query.id;
     
   const apartSize = useSelector((state) => state.apartSize);
+  // const generalStates = useSelector((state) => state.generalStates);
   // console.log('apartsize', apartSize);
 
   const settings = getSettings();
@@ -48,6 +48,7 @@ export default function Home() {
       dispatch(setBrandSettings(logo, headerBgPicture, headerBg));
     })
   }, [settings]);
+  console.log('apartsize', apartSize);
 
   const { data, error, loading } = useQuery(apartmentItem, {
     variables: { id: queryId ? queryId : 'K-01.01', var: queryId ? queryId + 'var2' : 'K-01.01var2' },
@@ -55,7 +56,7 @@ export default function Home() {
   
   if (loading) return <LoadingSpinner full={true}/>;
   if(error) return <p> Error</p>;
-  console.log(data.entry.dataList[0])
+
   const aparmentData = data.entry.dataList[0];
 
   let apartmentImage = aparmentData?.apartmentImage[0];

@@ -77,6 +77,7 @@ query MyQuery($id: [String], $var: [String]) {
           apartmentId
           basePrice
           generalArea
+          buildingsName
           floor
           apartmentImage {
             url
