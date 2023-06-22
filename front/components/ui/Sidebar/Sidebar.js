@@ -91,8 +91,8 @@ export default function Sidebar({
 				// (item.modificationMainStyle.toLowerCase().replaceAll(' ', '') === mainStyle.toLowerCase().replaceAll(' ', '') ||
 				// item.modificationMainStyle.toLowerCase() === "false")
 				) {
-				const modName = item.modificationName;
-				// const modName = item.modificationIndex;
+				// const modName = item.modificationName; // delete after Index implementation
+				const modName = item.modificationIndex;
 
 				// const modName = item.modificationIndex;  !!!! ToDo connect name to indexName -> change dispatching to redux IndexName {optName ...}
 				
@@ -126,7 +126,7 @@ export default function Sidebar({
 					// prevModGroupTitle = modName;
 				}  
 		})
-		// console.log('roomImages', roomImages)
+		console.log('roomImages', roomImages)
 		
 		// console.log('roomActiveMode', roomActiveMode)
 
@@ -137,9 +137,9 @@ export default function Sidebar({
 		//     ? activeMod.length === 0 ? currentRoom : (currentRoom + ' ' + `${mainStyle} ` +  activeMod.slice(0, -1)).toLowerCase()
 		//     : 
 			activeMod.length === 0 ? currentRoom : (currentRoom + ' ' +  activeMod.slice(0, -1)).toLowerCase();
-		const newActiveImage = roomImages?.filter((image) => image.title.toLowerCase() === roomActiveMode)[0];
+		const newActiveImage = roomImages?.filter((image) => image.title?.toLowerCase() === roomActiveMode)[0];
 		
-		// console.log('roomActiveMode', roomActiveMode)
+		console.log('roomActiveMode', roomActiveMode)
 		// console.log('newActiveImage', newActiveImage)
 		setLargeImage(newActiveImage); 
 		dispatch(changeRoomImage(currentRoom.slice(0, 5) === 'küche' ? 'küche' : currentRoom, newActiveImage));
