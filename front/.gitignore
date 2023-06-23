@@ -43,3 +43,4 @@
 
 # vercel
 /front/.vercel
+!readme.md
