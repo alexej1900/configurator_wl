@@ -8,7 +8,7 @@ const roomType = (state = {}, action) => {
 
       return state = {...state, [`${action.roomName}`] : {
           image: action.image, 
-          modifications:  {...state[`${action.roomName}`]?.modifications, [`${action.modName}`]: {...action.payload
+          modifications:  {...state[`${action.roomName}`]?.modifications, [`${action.modIndex}`]: {...action.payload
             // , option: options  decomment in case modifications groups
           }} 
         }   

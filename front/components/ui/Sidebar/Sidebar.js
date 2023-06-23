@@ -37,9 +37,11 @@ export default function Sidebar({
 
 	const sidebarOpen = useSelector(state => state.generalStates.open);
 	const { showStyle } = useSelector(state => state.generalStates);
+	const apartStyle = useSelector(state => state.apartStyle);
 
 	const roomType = useSelector(state => state.roomType);
-	console.log('modifyData', modifyData)
+	// console.log('modifyData', modifyData)
+	// console.log('roomType', roomType)
 
 	// =============== if we have main style lines decomment 1 line below ===============
 	// const mainStyle = useSelector(state => state.apartStyle).title;
@@ -49,8 +51,12 @@ export default function Sidebar({
 
 	const { OptionsPrice, IndividualPrice } = getPrices();
 
-	const modifications = getModifications(currentRoom.slice(0, 5) === 'küche' ? 'küche' : currentRoom);
+	// const modifications = getModifications(currentRoom.slice(0, 5) === 'küche' ? 'küche' : currentRoom); // for different type of kitchens
+	const modifications = getModifications(currentRoom);
 	const roomImages = getImages();
+
+	// console.log('modifications', modifications)
+
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -77,7 +83,7 @@ export default function Sidebar({
 	//     setIndividualPrice(increase ? individualPrice + price : individualPrice - price);
 	//     dispatch(changeApartIndividualPrice(individualPrice));
 	// }
-
+// console.log('apartSize11', apartSize)
 	const setActiveImage = () => {  // Comparing choosed modification and existing images 
 		let activeMod = '';
 		// =============== if we have modifications groups decomment 1 line below ===============
@@ -85,7 +91,9 @@ export default function Sidebar({
 
 		modifyData.forEach((item) => {
 
-			if (item.modificationVisibility && apartSize[item.modificationIndex]  // we check option if it visible and exist in this apartment
+			if (item.modificationVisibility  // we check if option is visible
+					&& item.modificationMainStyle == apartStyle.title.toLowerCase() // we check if option is equal to current style
+					&& apartSize[item.modificationIndex]  // we check if option is exist in this apartment
 				// =============== if we have main style lines decomment 3 line below ===============
 				// && 
 				// (item.modificationMainStyle.toLowerCase().replaceAll(' ', '') === mainStyle.toLowerCase().replaceAll(' ', '') ||
@@ -93,8 +101,6 @@ export default function Sidebar({
 				) {
 				// const modName = item.modificationName; // delete after Index implementation
 				const modName = item.modificationIndex;
-
-				// const modName = item.modificationIndex;  !!!! ToDo connect name to indexName -> change dispatching to redux IndexName {optName ...}
 				
 				// =============== if we have modifications groups decomment 7 lines below ===============
 				// const modGroupTitle = modifications[modName]?.modGroupTitle ? ` ${modifications[modName]?.modGroupTitle}` : '';
@@ -126,7 +132,7 @@ export default function Sidebar({
 					// prevModGroupTitle = modName;
 				}  
 		})
-		console.log('roomImages', roomImages)
+		// console.log('roomImages', roomImages)
 		
 		// console.log('roomActiveMode', roomActiveMode)
 
@@ -136,13 +142,14 @@ export default function Sidebar({
 		// currentRoom !== 'badezimmer' & currentRoom !== 'dusche'
 		//     ? activeMod.length === 0 ? currentRoom : (currentRoom + ' ' + `${mainStyle} ` +  activeMod.slice(0, -1)).toLowerCase()
 		//     : 
-			activeMod.length === 0 ? currentRoom : (currentRoom + ' ' +  activeMod.slice(0, -1)).toLowerCase();
+			activeMod.length === 0 ? currentRoom : (currentRoom + ' ' + apartStyle.title + ' ' +  activeMod.slice(0, -1)).toLowerCase();
 		const newActiveImage = roomImages?.filter((image) => image.title?.toLowerCase() === roomActiveMode)[0];
 		
-		console.log('roomActiveMode', roomActiveMode)
+		// console.log('roomActiveMode', roomActiveMode)
 		// console.log('newActiveImage', newActiveImage)
 		setLargeImage(newActiveImage); 
-		dispatch(changeRoomImage(currentRoom.slice(0, 5) === 'küche' ? 'küche' : currentRoom, newActiveImage));
+		// dispatch(changeRoomImage(currentRoom.slice(0, 5) === 'küche' ? 'küche' : currentRoom, newActiveImage)); //for different types of kitchens
+		dispatch(changeRoomImage(currentRoom, newActiveImage));
 		// console.log('newActiveImage11333', roomImages[38].title.slice(0, 5).toLowerCase() === roomActiveMode.slice(0, 5))
 		// console.log('newActiveImage11', roomImages?.filter((image) => image.title.toLowerCase() === roomActiveMode)[0])
 	}

@@ -56,12 +56,12 @@ export default function FinalRoom({ roomName, style }) {
 
   // const roomImage = room.image ? room.image : data.entry.roomStyles[0].roomStyleExamples[0].styleDefaultImage[0];
 
-  const editClickHandler = (modName) => {
+  const editClickHandler = (modIndex) => {
     dispatch(changeSidebarState(true));
     dispatch(changeRoomVisibility(false));
     dispatch(setSummaryVisibility(true));
-    dispatch(changeActivePin(modName));
-    dispatch(changeActiveMod(modName));
+    dispatch(changeActivePin(modIndex));
+    dispatch(changeActiveMod(modIndex));
   }
 
   const allOptions = dataByStyle
@@ -141,7 +141,7 @@ export default function FinalRoom({ roomName, style }) {
         {list.map((data, index) => {
 
             const {modGroupTitle, featuredImage, styleTitle, subtitle, description, additionalPrice} = data[1];
-            // console.log('data[1]', data[1])
+            // console.log('data[0]', data)
             if (!checkObjIsEmpty(data[1])) 
               return (
                 <div key={index} className={`${styles.halfLine}`}>

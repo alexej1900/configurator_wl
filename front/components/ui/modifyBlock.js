@@ -36,7 +36,7 @@ export default function ModifyBlock({
   const apartSize = useSelector(state => state.apartSize);
 
   const dispatch = useDispatch();
-
+// console.log('cardItem', cardItem);
   useEffect(() => {
     
     if (activePin === cardItem.modificationName) {
@@ -55,6 +55,7 @@ export default function ModifyBlock({
 
   const modificationName = cardItem.modificationName;
   const modificationDescription = cardItem.modificationDescription;
+  const modificationIndex = cardItem.modificationIndex;
 
   let modificationImage;
   let modificationTitle;
@@ -113,8 +114,8 @@ export default function ModifyBlock({
     setIsInLine(isInLine ? !isInLine : isInLine); 
     setActiveMod();
 
-    dispatch(changeActiveMod(modificationName));
-    dispatch(changeActivePin(modificationName));
+    dispatch(changeActiveMod(modificationIndex));
+    dispatch(changeActivePin(modificationIndex));
   }
 
   // const setModsPrice = (price) => {
@@ -122,13 +123,13 @@ export default function ModifyBlock({
   // }
 
   const changeActiveModification = () => {
-    const activeMod = (modifications && modifications[`${modificationName}`]) 
+    const activeMod = (modifications && modifications[`${modificationIndex}`]) 
     ? {
-      modificationImage: [{url: modifications[`${modificationName}`].featuredImage, width: '80px', height: '50px'}],
-      modificationStyle: modifications[`${modificationName}`].subtitle,
-      modificationTitle: modifications[`${modificationName}`].styleTitle,
-      modificationNumber: modifications[`${modificationName}`].index,
-      activeOption: modifications[`${modificationName}`].option ? modifications[`${modificationName}`].option.index : undefined,
+      modificationImage: [{url: modifications[`${modificationIndex}`].featuredImage, width: '80px', height: '50px'}],
+      modificationStyle: modifications[`${modificationIndex}`].subtitle,
+      modificationTitle: modifications[`${modificationIndex}`].styleTitle,
+      modificationNumber: modifications[`${modificationIndex}`].index,
+      activeOption: modifications[`${modificationIndex}`].option ? modifications[`${modificationIndex}`].option.index : undefined,
     } 
     // : roomType !== "schlafzimmer" ? {... cardItem.modificationItemExample[0], modificationNumber: 0, activeOption: styleId,} // if style lines are not separated, replace to commented code below (3 lines)
     
@@ -170,6 +171,7 @@ export default function ModifyBlock({
 
   const selectCardHandler = (
     index, 
+    modificationIndex,
     modificationName, 
     modificationImage, 
     modificationTitle, 
@@ -177,14 +179,14 @@ export default function ModifyBlock({
     modificationDescr
     ) => {
 
-    activeStyle(index, modificationName, modificationImage, modificationTitle, modificationStyle, modificationDescr, modsAdditionalPrice[index] ? modsAdditionalPrice[index] : 0);
+    activeStyle(index, modificationIndex, modificationName, modificationImage, modificationTitle, modificationStyle, modificationDescr, modsAdditionalPrice[index] ? modsAdditionalPrice[index] : 0);
     setChecked(true);
     cardItem.modificationVisibility && dispatch(changeLoadingState(true)); // if modification non visible, don't loads new big image
   }
 
   activeIndex = activeModification.modificationNumber;
 
-  // console.log('activeStyle', activeStyle)
+  // console.log('activeModification', activeModification)
   // console.log('modificationName', modificationName)
   // console.log('apartSize', apartSize)
   return (
@@ -238,6 +240,7 @@ export default function ModifyBlock({
                       key={index}
                       selectCard={() => selectCardHandler(
                         index, 
+                        modificationIndex, 
                         cardItem.modificationName,
                         item.modificationImage && item.modificationImage[0].url, 
                         item.modificationTitle, 

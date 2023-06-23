@@ -21,11 +21,11 @@ export default function Header () {
   const { menu, open, pinStatus, logo } = useSelector((state) => state.generalStates);
   const apartSize = useSelector((state) => state.apartSize);
 
-  // console.log(logo)
+  // console.log(query, pathname)
   
   const rooms = [
+    'Styles', 
     'Wohnzimmer', 
-    'Küchenlinien', 
     `${apartSize.badewanne ? 'Badezimmer' : ''}`, 
     `${apartSize.dusche ? 'Dusche' : ''}`, 
     'Schlafzimmer', 
@@ -97,10 +97,10 @@ export default function Header () {
             {rooms?.map((room) => {
           
               if (room) {
-                const currentRoom = `/${room.toLowerCase() !== 'küchenlinien' ? room.toLowerCase() : 'kitchen-type'}`;
+                const currentRoom = `/${room.toLowerCase() !== 'styles' ? room.toLowerCase() : 'type'}`;
                 return (
                   <Link href={currentRoom} key={room}>
-                    <a className={`${query.room === currentRoom.slice(1) ? style.active : ''} ${style.roomItem}`} onClick={() => closeMenuHandler()}>{room}</a>
+                    <a className={`${pathname.slice(1) === currentRoom.slice(1) ? style.active : ''} ${style.roomItem}`} onClick={() => closeMenuHandler()}>{room}</a>
                   </Link>
                 )}
             })}

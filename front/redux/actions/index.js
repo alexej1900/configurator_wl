@@ -197,14 +197,14 @@ export const changeApartIndividualPrice = (key, price) => {
 
 // ROOMS TYPES & OPTIONS --------------------------------
 
-export const changeRoomType = (room, modName, index,  featuredImage, styleTitle, subtitle, description, additionalPrice, modGroupTitle, largeImage, mainStyle) => dispatch => {
+export const changeRoomType = (room, modIndex, modName, index,  featuredImage, styleTitle, subtitle, description, additionalPrice, modGroupTitle, largeImage, mainStyle) => dispatch => {
   // console.log('dispatch', {room, modName, index,  featuredImage, styleTitle, subtitle, description, additionalPrice, modGroupTitle, largeImage, mainStyle})
   dispatch({
     type: 'CHANGE_ROOM_TYPE',
     roomName: room,
     image: largeImage,
-    modName: modName,
-    payload: {index,  featuredImage, styleTitle, subtitle, description, additionalPrice, modGroupTitle, mainStyle},
+    modIndex: modIndex,
+    payload: {index,  featuredImage, modName, styleTitle, subtitle, description, additionalPrice, modGroupTitle, mainStyle},
   });
 };
 

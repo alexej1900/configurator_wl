@@ -50,10 +50,11 @@ export default function Room() {
 	const { apartSize, apartStyle, generalStates, roomType} = useSelector((state) => state);
 	const sidebarState = generalStates.open;
 	const isImageload = generalStates.loading;
-	const roomState = roomType[ROOM_TYPE?.slice(0, -1) === 'küche' ? 'küche' : ROOM_TYPE];
+	// const roomState = roomType[ROOM_TYPE?.slice(0, -1) === 'küche' ? 'küche' : ROOM_TYPE]; //for different types of kitchens
+	const roomState = roomType[ROOM_TYPE];
 
 	const roomsWithChangeableFloor = ['wohnzimmer', 'küche', 'schlafzimmer' , 'gang'];
-	// console.log('generalStates', generalStates.pinStatus)
+	console.log('ROOM_TYPE', ROOM_TYPE)
 
 	const container = useRef(null);
 
@@ -93,7 +94,7 @@ export default function Room() {
 	useEffect(async() => {
 		
 		setTimeout(() => {
-			if (data && ROOM_TYPE === 'küche1' || ROOM_TYPE === 'küche2' || ROOM_TYPE === 'küche3') {
+			if (data && ROOM_TYPE === 'kuche') {
 				const modifications = 
 					data?.entry.mods[0].modificationsTypes && data?.entry.mods[0].modificationsTypes
 						.filter((item) => item.modificationName !== 'Boden' && item.modificationName !== 'Decke');
@@ -142,14 +143,14 @@ export default function Room() {
 
   const modifyData = data.entry.mods[0].modificationsTypes;
     
-  const changeType = (index, modName,  featuredImage, styleTitle, subtitle, description, additionalPrice, modGroupTitle, mainStyle) => {
+  const changeType = (index, modIndex, modName,  featuredImage, styleTitle, subtitle, description, additionalPrice, modGroupTitle, mainStyle) => {
 		// console.log('index, modName,  featuredImage, styleTitle, subtitle, description, modGroupTitle, mainStyle', {index, modName,  featuredImage, styleTitle, subtitle, description, additionalPrice, modGroupTitle, mainStyle})
-		setOptionData({index, modName,  featuredImage, styleTitle, subtitle, description, additionalPrice, modGroupTitle, mainStyle});
+		setOptionData({index, modIndex, modName,  featuredImage, styleTitle, subtitle, description, additionalPrice, modGroupTitle, mainStyle});
 		const room = (ROOM_TYPE.slice(0, -1) === 'küche') ? ROOM_TYPE.slice(0, -1) : ROOM_TYPE;
-		
+
 		if (room === 'wohnzimmer') {  // set floor type for all types of rooms
 			roomsWithChangeableFloor
-				.forEach((room) => dispatch(changeRoomType(room, modName, index,  featuredImage, styleTitle, subtitle, description, additionalPrice, modGroupTitle, largeImage, mainStyle)))
+				.forEach((room) => dispatch(changeRoomType(room, modIndex, modName, index,  featuredImage, styleTitle, subtitle, description, additionalPrice, modGroupTitle, largeImage, mainStyle)))
 			dispatch(changeApartPrice(modName, additionalPrice));
 		} else if (modName === 'Boden') {  // else show popup with confirmation
 			setIsFloorConfirmation(true);
@@ -160,6 +161,7 @@ export default function Room() {
 		} else { // for other options
 			dispatch(changeRoomType(
 				room, 
+				modIndex,
 				modName, 
 				index,  
 				featuredImage, 
@@ -174,7 +176,7 @@ export default function Room() {
 			dispatch(changeApartPrice(modName, additionalPrice));
 		}
 
-    ROOM_TYPE.slice(0, -1) !== 'küche' && dispatch(changeActivePin(modName));
+    ROOM_TYPE.slice(0, -1) !== 'küche' && dispatch(changeActivePin(modIndex));
   }
 	
 	const changeFloorType = () => { // change floor type for all rooms, change price
@@ -182,6 +184,7 @@ export default function Room() {
 			.forEach((room) => dispatch(changeRoomType(
 				room, 
 				'Boden', 
+				'Boden',
 				optionData.index,  
 				optionData.featuredImage, 
 				optionData.styleTitle, 
@@ -284,7 +287,7 @@ export default function Room() {
 					modifyData={modifyData}
 					setLargeImage={setLargeImage}
 					activeStyle = { 
-						(index, modName, featuredImage, styleTitle, subtitle, additionalPrice, modGroupTitle, mainStyle) => changeType(index, modName,  featuredImage, styleTitle, subtitle, additionalPrice, modGroupTitle, mainStyle)
+						(index, modIndex, modName, featuredImage, styleTitle, subtitle, additionalPrice, modGroupTitle, mainStyle) => changeType(index, modIndex, modName,  featuredImage, styleTitle, subtitle, additionalPrice, modGroupTitle, mainStyle)
 					}
 					currentRoom={ROOM_TYPE}
 					title={data.entry.title} 

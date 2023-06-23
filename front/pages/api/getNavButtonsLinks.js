@@ -7,16 +7,16 @@ export default  function getNavButtonsLinks(currentRoom) {
 
 
 	if (currentRoom === 'type') {
-		nextLink = {link: `/${roomsTitle[0].toLowerCase()}`, title: roomsTitle[0], icon: 'nextRoom'};
+		nextLink = {link: `/${roomsSlug[0].toLowerCase()}`, title: roomsTitle[0], icon: 'nextRoom'};
 		prevLink = '/';
 	} else {
-		for (let i = 0; i < roomsTitle.length; i++) {   
-			if (roomsTitle[i].toLowerCase() === currentRoom) {
+		for (let i = 0; i < roomsSlug.length; i++) {   
+			if (roomsSlug[i].toLowerCase() === currentRoom) {
 				nextLink = roomsTitle[i+1] 
-					?  {link: `/${roomsTitle[i+1].toLowerCase()}`, title: roomsTitle[i+1], icon: 'nextRoom'}
+					?  {link: `/${roomsSlug[i+1].toLowerCase()}`, title: roomsTitle[i+1], icon: 'nextRoom'}
 					:  {link: '/summary', title: 'Abschliessen', icon: 'checkIcon'};
 
-				prevLink = roomsTitle[i-1] ? roomsTitle[i-1].toLowerCase() : isStylePageExist ? '/type' : '/';
+				prevLink = roomsSlug[i-1] ? roomsSlug[i-1].toLowerCase() : roomsSlug[i].toLowerCase() == 'kuche' ? '/type' : '/';
 			}
 		}
 	}

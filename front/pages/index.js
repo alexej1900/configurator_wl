@@ -48,7 +48,7 @@ export default function Home() {
       dispatch(setBrandSettings(logo, headerBgPicture, headerBg));
     })
   }, [settings]);
-  console.log('apartsize', apartSize);
+  // console.log('apartsize', apartSize);
 
   const { data, error, loading } = useQuery(apartmentItem, {
     variables: { id: queryId ? queryId : 'K-01.01', var: queryId ? queryId + 'var2' : 'K-01.01var2' },
