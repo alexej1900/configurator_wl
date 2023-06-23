@@ -22,16 +22,15 @@ export default function PdfPageNew ({ saveTrigger, pdfDataTrigger, setPdfUrl}) {
 	const link = generalStates.link;
 
 	const rooms = [
-    'Wohnzimmer', 
-		'Küche',
+    'Kuche',
 		'Badezimmer', 
-    'Dusche', 
+    'Dusche',  
     'Schlafzimmer', 
-    // 'Gang'
+		'Flur'
   ];
 
-	if (!apartSize.badewanne) rooms.splice(2, 1);
-	if (!apartSize.dusche) rooms.splice(3, 1);
+	if (!apartSize.badewanne) rooms.splice(1, 1);
+	if (!apartSize.dusche) rooms.splice(2, 1);
 
   const price = apartSize.price;
 

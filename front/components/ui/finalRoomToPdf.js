@@ -18,22 +18,26 @@ export default function FinalRoomToPdf({ roomName }) {
   const roomImages = getImages();
   const { roomType, apartStyle, apartSize } = useSelector(state => state);
   
-  const currentRoom = roomName === 'Küche' ? `${roomName}${apartStyle.kitchenStyle + 1}` : roomName;
-  const modifications = getModifications(currentRoom.slice(0, 5) === 'Küche' ? 'küche' : currentRoom);
+  const currentRoom = roomName.toLowerCase();
+  const modifications = getModifications(currentRoom);
 
-  const { data, loading, error } = useQuery(RoomData(currentRoom.toLowerCase()));
+  const { data, loading, error } = useQuery(RoomData(currentRoom));
   if (loading) return <LoadingSpinner/>
   if(error) return <p>Error, please read the console. {console.log(error)}</p>
 
   const modifyData = data.entry?.mods[0].modificationsTypes;
   
   const dataByStyle = modifyData?.filter((data) => {
-    return !data.modificationMainStyle || data.modificationMainStyle === 'false' || data.modificationMainStyle.toLowerCase() === style.toLowerCase()
+    return !data.modificationMainStyle || data.modificationMainStyle === 'false' || data.modificationMainStyle.toLowerCase() === apartStyle.title.toLowerCase()
   });
 
   const room = roomType[`${roomName.toLowerCase()}`] 
     ? roomType[`${roomName.toLowerCase()}`] 
-    : {image: data.entry.roomStyles[0].roomStyleExamples[0].styleDefaultImage[0]}
+    : {image: data.entry?.roomStyles[0].roomStyleExamples[0].styleDefaultImage[0]}
+
+  // console.log('roomName', roomName)
+  // console.log('dataByStyle', dataByStyle)
+
 
   const allOptions = dataByStyle
     .filter((data) => apartSize[data.modificationIndex])
@@ -145,7 +149,7 @@ export default function FinalRoomToPdf({ roomName }) {
 
   const roomActiveMode = 
     activeMod.length === 0 ? currentRoom.toLowerCase() : (currentRoom + ' ' +  activeMod.slice(0, -1)).toLowerCase();
-  const roomImage1 = roomImages?.filter((image) => image.title.toLowerCase() === roomActiveMode.toLowerCase())[0];
+  const roomImage1 = roomImages?.filter((image) => image.title?.toLowerCase() === roomActiveMode.toLowerCase())[0];
   const roomImage = room.image ? room.image : roomImage1;
   // console.log('SleepRoomNonVisibleOptions', SleepRoomNonVisibleOptions)
 

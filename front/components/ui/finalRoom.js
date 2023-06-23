@@ -32,8 +32,8 @@ export default function FinalRoom({ roomName, style }) {
 
   // console.log('roomName', roomName)
 
-  const currentRoom = roomName === 'Küche' ? `${roomName}${apartStyle.kitchenStyle + 1}` : roomName;
-  const modifications = getModifications(currentRoom.slice(0, 5) === 'Küche' ? 'küche' : currentRoom);
+  const currentRoom = roomName;
+  const modifications = getModifications(currentRoom);
 
   const { data, loading, error } = useQuery(RoomData(currentRoom.toLowerCase()));
   if (loading) return <LoadingSpinner/>
@@ -44,7 +44,7 @@ export default function FinalRoom({ roomName, style }) {
   const dataByStyle = modifyData?.filter((data) => {
     return !data.modificationMainStyle || data.modificationMainStyle === 'false' || data.modificationMainStyle.toLowerCase() === style.toLowerCase()
   });
-
+  console.log('dataByStyle', dataByStyle)
   const room = roomType[`${roomName.toLowerCase()}`] 
     ? roomType[`${roomName.toLowerCase()}`] 
     : {image: data.entry.roomStyles[0].roomStyleExamples[0].styleDefaultImage[0]}
@@ -65,10 +65,10 @@ export default function FinalRoom({ roomName, style }) {
   }
 
   const allOptions = dataByStyle
-    .filter((data) => apartSize[data.modificationIndex])
+    .filter((data) => apartSize[data.modificationIndex.toLowerCase()])
     .map((item) => {
-    if(room?.modifications && room?.modifications[item.modificationName]) {
-      return [item.modificationName, room.modifications[item.modificationName]]
+    if(room?.modifications && room?.modifications[item.modificationIndex.toLowerCase()]) {
+      return [item.modificationIndex.toLowerCase(), room.modifications[item.modificationIndex.toLowerCase()]]
     } else {
       const card = {
         modGroupTitle : '', 
@@ -79,15 +79,15 @@ export default function FinalRoom({ roomName, style }) {
         additionalPrice: item.modificationItemExample[0].modsAdditionalPrice
       }
       
-      return [item.modificationName, card]
+      return [item.modificationIndex.toLowerCase(), card]
     }
   })
 
   const SleepRoomNonVisibleOptions = roomName === "Schlafzimmer" && dataByStyle
-    .filter((data) => !data.modificationVisibility && apartSize[data.modificationIndex])
+    .filter((data) => !data.modificationVisibility && apartSize[data.modificationIndex.toLowerCase()])
     .map((item) => {
-    if(room?.modifications && room?.modifications[item.modificationName]) {
-      return [item.modificationName, room.modifications[item.modificationName]]
+    if(room?.modifications && room?.modifications[item.modificationIndex.toLowerCase()]) {
+      return [item.modificationIndex.toLowerCase(), room.modifications[item.modificationIndex.toLowerCase()]]
     } else {
       const card = {
         modGroupTitle : '', 
@@ -98,15 +98,15 @@ export default function FinalRoom({ roomName, style }) {
         additionalPrice: item.modificationItemExample[0].modsAdditionalPrice
       }
       
-      return [item.modificationName, card]
+      return [item.modificationIndex.toLowerCase(), card]
     }
   })
 
   const SleepRoomVisibleOptions = roomName === "Schlafzimmer" && dataByStyle
-    .filter((data) => data.modificationVisibility && apartSize[data.modificationIndex])
+    .filter((data) => data.modificationVisibility && apartSize[data.modificationIndex.toLowerCase()])
     .map((item) => {
-    if(room?.modifications && room?.modifications[item.modificationName]) {
-      return [item.modificationName, room.modifications[item.modificationName]]
+    if(room?.modifications && room?.modifications[item.modificationIndex.toLowerCase()]) {
+      return [item.modificationIndex.toLowerCase(), room.modifications[item.modificationIndex.toLowerCase()]]
     } else {
       const card = {
         modGroupTitle : '', 
@@ -117,7 +117,7 @@ export default function FinalRoom({ roomName, style }) {
         additionalPrice: item.modificationItemExample[0].modsAdditionalPrice
       }
       
-      return [item.modificationName, card]
+      return [item.modificationIndex.toLowerCase(), card]
     }
   })
 
@@ -126,8 +126,8 @@ export default function FinalRoom({ roomName, style }) {
   
   modifyData.forEach((item) => {
 
-    if (item.modificationVisibility && apartSize[item.modificationIndex]) {
-      const modName = item.modificationName;
+    if (item.modificationVisibility && apartSize[item.modificationIndex.toLowerCase()]) {
+      const modName = item.modificationIndex.toLowerCase();
       activeMod = modifications && modifications[modName]
         ? activeMod + 
           `${modName} ${modifications[modName].index} `
@@ -177,7 +177,7 @@ export default function FinalRoom({ roomName, style }) {
 
   const roomActiveMode = 
     activeMod.length === 0 ? currentRoom.toLowerCase() : (currentRoom + ' ' +  activeMod.slice(0, -1)).toLowerCase();
-  const roomImage1 = roomImages?.filter((image) => image.title.toLowerCase() === roomActiveMode.toLowerCase())[0];
+  const roomImage1 = roomImages?.filter((image) => image.title?.toLowerCase() === roomActiveMode.toLowerCase())[0];
   const roomImage = room.image ? room.image : roomImage1;
   // console.log('SleepRoomNonVisibleOptions', SleepRoomNonVisibleOptions)
   // console.log('roomImage', roomImage.url)
