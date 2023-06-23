@@ -21,7 +21,7 @@ export default function Header () {
   const { menu, open, pinStatus, logo } = useSelector((state) => state.generalStates);
   const apartSize = useSelector((state) => state.apartSize);
 
-  // console.log(query, pathname)
+  // console.log('apartSize', apartSize)
   
   const rooms = [
     'Styles', 

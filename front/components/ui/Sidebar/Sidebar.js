@@ -55,7 +55,7 @@ export default function Sidebar({
 	const modifications = getModifications(currentRoom);
 	const roomImages = getImages();
 
-	// console.log('modifications', modifications)
+	// console.log('modifyData', modifyData)
 
 
 	useEffect(() => {
@@ -65,6 +65,7 @@ export default function Sidebar({
   }, [currentRoom]);
 
 	useEffect(() => {
+		
 		if (roomImages && modifyData && !checkObjIsEmpty(modifications)) {
 			setActiveImage();
 		}
@@ -90,18 +91,19 @@ export default function Sidebar({
 		// let prevModGroupTitle = null; 
 
 		modifyData.forEach((item) => {
-
+			
 			if (item.modificationVisibility  // we check if option is visible
-					&& item.modificationMainStyle == apartStyle.title.toLowerCase() // we check if option is equal to current style
-					&& apartSize[item.modificationIndex]  // we check if option is exist in this apartment
+					&& (item.modificationMainStyle == apartStyle.title.toLowerCase() || item.modificationMainStyle == 'false') // we check if option is equal to current style
+					&& apartSize[item.modificationIndex.toLowerCase()]  // we check if option is exist in this apartment
 				// =============== if we have main style lines decomment 3 line below ===============
 				// && 
 				// (item.modificationMainStyle.toLowerCase().replaceAll(' ', '') === mainStyle.toLowerCase().replaceAll(' ', '') ||
 				// item.modificationMainStyle.toLowerCase() === "false")
 				) {
+
 				// const modName = item.modificationName; // delete after Index implementation
-				const modName = item.modificationIndex;
-				
+				const modName = item.modificationIndex.toLowerCase();
+
 				// =============== if we have modifications groups decomment 7 lines below ===============
 				// const modGroupTitle = modifications[modName]?.modGroupTitle ? ` ${modifications[modName]?.modGroupTitle}` : '';
 				// const modGroupBlock = prevModGroupTitle !== modGroupTitle
@@ -145,7 +147,7 @@ export default function Sidebar({
 			activeMod.length === 0 ? currentRoom : (currentRoom + ' ' + apartStyle.title + ' ' +  activeMod.slice(0, -1)).toLowerCase();
 		const newActiveImage = roomImages?.filter((image) => image.title?.toLowerCase() === roomActiveMode)[0];
 		
-		// console.log('roomActiveMode', roomActiveMode)
+		console.log('roomActiveMode', roomActiveMode)
 		// console.log('newActiveImage', newActiveImage)
 		setLargeImage(newActiveImage); 
 		// dispatch(changeRoomImage(currentRoom.slice(0, 5) === 'küche' ? 'küche' : currentRoom, newActiveImage)); //for different types of kitchens

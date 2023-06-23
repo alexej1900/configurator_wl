@@ -31,7 +31,7 @@ export default function ModifyBlock({
     {... cardItem.modificationItemExample[0], modificationNumber: 0, activeOption: 0}
     );
 
-  const roomState = useSelector(state => state.roomType)[roomType.slice(0, 5) === 'küche' ? 'küche' : roomType];
+  const roomState = useSelector(state => state.roomType)[roomType];
   const style = useSelector(state => state.apartStyle);
   const apartSize = useSelector(state => state.apartSize);
 
@@ -55,7 +55,7 @@ export default function ModifyBlock({
 
   const modificationName = cardItem.modificationName;
   const modificationDescription = cardItem.modificationDescription;
-  const modificationIndex = cardItem.modificationIndex;
+  const modificationIndex = cardItem.modificationIndex.toLowerCase();
 
   let modificationImage;
   let modificationTitle;
@@ -94,10 +94,10 @@ export default function ModifyBlock({
         ? {0: 0, 1: apartSize.kitchen2Back2Price}
         : {}
 
-  const modifications = getModifications(roomType.slice(0, 5) === 'küche' ? 'küche' : roomType);
+  const modifications = getModifications(roomType);
 
   useEffect(() => {
-    if (modifications && modifications[`${modificationName}`]) {
+    if (modifications && modifications[`${modificationIndex}`]) {
       setChecked(true);
       setIsInLine(false);
     } 
@@ -187,7 +187,6 @@ export default function ModifyBlock({
   activeIndex = activeModification.modificationNumber;
 
   // console.log('activeModification', activeModification)
-  // console.log('modificationName', modificationName)
   // console.log('apartSize', apartSize)
   return (
     <>

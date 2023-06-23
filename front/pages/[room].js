@@ -42,7 +42,6 @@ export default function Room() {
 	const [isScroll, setIsScroll] = useState(false);
 	const [isPopup, setIsPopup] = useState(false);
 	const [isFloorConfirmation, setIsFloorConfirmation] = useState(false);
-	const [isConfirmation, setIsConfirmation] = useState(false);
 	const [optionData, setOptionData] = useState({});
 
 	const dispatch = useDispatch();
@@ -54,7 +53,7 @@ export default function Room() {
 	const roomState = roomType[ROOM_TYPE];
 
 	const roomsWithChangeableFloor = ['wohnzimmer', 'küche', 'schlafzimmer' , 'gang'];
-	console.log('ROOM_TYPE', ROOM_TYPE)
+	// console.log('ROOM_TYPE', ROOM_TYPE)
 
 	const container = useRef(null);
 
@@ -97,11 +96,12 @@ export default function Room() {
 			if (data && ROOM_TYPE === 'kuche') {
 				const modifications = 
 					data?.entry.mods[0].modificationsTypes && data?.entry.mods[0].modificationsTypes
-						.filter((item) => item.modificationName !== 'Boden' && item.modificationName !== 'Decke');
+						.filter((item) => item.modificationIndex !== 'boden' && item.modificationIndex !== 'Decke');
 
 				modifications && modifications.forEach(item => {
 					changeType(
 						0, 
+						item.modificationIndex, 
 						item.modificationName, 
 						item.modificationItemExample[0].modificationImage[0].url, 
 						item.modificationItemExample[0].modificationTitle,
@@ -146,17 +146,14 @@ export default function Room() {
   const changeType = (index, modIndex, modName,  featuredImage, styleTitle, subtitle, description, additionalPrice, modGroupTitle, mainStyle) => {
 		// console.log('index, modName,  featuredImage, styleTitle, subtitle, description, modGroupTitle, mainStyle', {index, modName,  featuredImage, styleTitle, subtitle, description, additionalPrice, modGroupTitle, mainStyle})
 		setOptionData({index, modIndex, modName,  featuredImage, styleTitle, subtitle, description, additionalPrice, modGroupTitle, mainStyle});
-		const room = (ROOM_TYPE.slice(0, -1) === 'küche') ? ROOM_TYPE.slice(0, -1) : ROOM_TYPE;
+		const room = ROOM_TYPE;
 
 		if (room === 'wohnzimmer') {  // set floor type for all types of rooms
 			roomsWithChangeableFloor
 				.forEach((room) => dispatch(changeRoomType(room, modIndex, modName, index,  featuredImage, styleTitle, subtitle, description, additionalPrice, modGroupTitle, largeImage, mainStyle)))
 			dispatch(changeApartPrice(modName, additionalPrice));
-		} else if (modName === 'Boden') {  // else show popup with confirmation
+		} else if (modIndex === 'boden') {  // else show popup with confirmation
 			setIsFloorConfirmation(true);
-			return;
-		} else if (modName === 'Decke') {  // else show popup with confirmation
-			setIsConfirmation(true);
 			return;
 		} else { // for other options
 			dispatch(changeRoomType(
@@ -176,14 +173,14 @@ export default function Room() {
 			dispatch(changeApartPrice(modName, additionalPrice));
 		}
 
-    ROOM_TYPE.slice(0, -1) !== 'küche' && dispatch(changeActivePin(modIndex));
+    dispatch(changeActivePin(modIndex));
   }
 	
 	const changeFloorType = () => { // change floor type for all rooms, change price
 		roomsWithChangeableFloor
 			.forEach((room) => dispatch(changeRoomType(
 				room, 
-				'Boden', 
+				'boden', 
 				'Boden',
 				optionData.index,  
 				optionData.featuredImage, 
@@ -195,24 +192,6 @@ export default function Room() {
 				optionData.mainStyle))
 			)
 		dispatch(changeApartPrice('Boden', optionData.additionalPrice));
-		onCancel();
-	}
-
-	const changCeilingType = () => { // change floor type for all rooms, change price
-		roomsWithChangeableFloor
-			.forEach((room) => dispatch(changeRoomType(
-				room, 
-				'Decke', 
-				optionData.index,  
-				optionData.featuredImage, 
-				optionData.styleTitle, 
-				optionData.subtitle, 
-				optionData.description, 
-				optionData.additionalPrice, 
-				optionData.modGroupTitle, 
-				optionData.mainStyle))
-			)
-		dispatch(changeApartPrice('Decke', optionData.additionalPrice));
 		onCancel();
 	}
 
@@ -231,7 +210,6 @@ export default function Room() {
 	
 	const onCancel = () => {
 		setIsPopup(false);
-		setIsConfirmation(false);
 		setIsFloorConfirmation(false);
 		dispatch(changeLoadingState(false))
 	};
@@ -254,10 +232,6 @@ export default function Room() {
 							width={window.innerWidth < 1500 ? 1500 : window.innerWidth}
 							height={window.innerHeight}
 							layout='fixed' 
-							// layout='fill' 
-							// object-fit="cover" 
-							// style={{objectPosition: 'center'}}
-							// style={{objectFit: "contain"}}
 							onLoadingComplete={() => dispatch(changeLoadingState(false))}
 							priority 
 							alt="Main image"
@@ -299,22 +273,7 @@ export default function Room() {
 			</div>
 
 			{isPopup && <ContactForm onCancel={onCancel}/>}
-			{isConfirmation 
-				&& <ConfirmationForm 
-						onCancel={onCancel} 
-						onConfirm={changCeilingType}
-						title={'Zimmerübergreifende Option'}
-						child={<>
-										<div>Eine Anpassung der Option “Decke” wird auch in weiteren Räumen übernommen:</div>
-											<ul>
-												{roomsWithChangeableFloor.map((roomItem, index) => {
-													if (roomItem !== ROOM_TYPE ? ROOM_TYPE : path) return <li key={index}>{roomItem}</li>
-												})}
-											</ul>
-										</>
-									}
-						/>
-				}
+			
 			{isFloorConfirmation 
 				&& <ConfirmationForm 
 						onCancel={onCancel} 

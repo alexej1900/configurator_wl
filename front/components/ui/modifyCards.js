@@ -24,8 +24,8 @@ export default function ModifyCards({ activeStyle, cardData, styleId, roomType, 
     return !data.modificationMainStyle || data.modificationMainStyle === 'false' || data.modificationMainStyle.toLowerCase() === style.toLowerCase().replaceAll(' ', '')
   });
 
-  const visibleData = dataByStyle?.filter((data) => data.modificationVisibility && apartSize[data.modificationIndex]);
-  const nonVisibleData = dataByStyle?.filter((data) => !data.modificationVisibility && apartSize[data.modificationIndex]);
+  const visibleData = dataByStyle?.filter((data) => data.modificationVisibility && apartSize[data.modificationIndex.toLowerCase()]);
+  const nonVisibleData = dataByStyle?.filter((data) => !data.modificationVisibility && apartSize[data.modificationIndex.toLowerCase()]);
 
   useEffect(() => {
     visibleData.length === 0 && setIsActiveModVisible(false);

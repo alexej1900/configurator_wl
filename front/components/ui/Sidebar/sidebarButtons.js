@@ -62,9 +62,9 @@ export default function SidebarButtons({ currentRoom, styleTypeSet, roomId, show
 							title={currentRoom === 'type' ? 'Wahl bestätigen' : nextLink.title}
 							href={nextLink.link}
 							type="primary" 
-							iconName={currentRoom === 'type' ? 'confirm' : currentRoom === 'schlafzimmer' ? 'summary' :'arrow-right'} 
+							iconName={currentRoom === 'type' ? 'confirm' : currentRoom === 'flur' ? 'summary' :'arrow-right'} 
 							iconColor="#fff" 
-							iconRight={currentRoom === 'schlafzimmer' ? false : true }
+							iconRight={currentRoom === 'flur' ? false : true }
 							clickFn={styleTypeSet}
 							// style={{height: secondButtonHeight}}
 							/>
