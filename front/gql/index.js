@@ -79,6 +79,7 @@ query MyQuery($id: [String], $var: [String]) {
           generalArea
           buildingsName
           floor
+          roomsCount
           apartmentImage {
             url
             width

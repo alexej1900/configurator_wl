@@ -14,13 +14,14 @@ export default function Footer() {
 
         <div className={styles.back__btn}>
           <IconComponent name="arrow" color="#3C6589"/>
-          <p className={styles.back__btn_title}>Zurück zur Appenzeller Huus Website</p>
+          <p className={styles.back__btn_title}>Zurück zur Website</p>
         </div>
 
         <div className={styles.footer__content}>
           <div className={styles.footer__content_links}>
-            <img className={styles.footer__content_links_logo} src='./AHLogo.svg' alt="summary" id="logoImage"/>
-            
+          {logo &&
+            <img className={styles.footer__content_links_logo} src={logo} alt="summary" id="logoImage"/>
+          }  
             {/* <div className={styles.footer__content_links_social}>
               <a href="#" target='_blank'>
                 <IconComponent name="fb" color="#000"/>
@@ -32,17 +33,17 @@ export default function Footer() {
           </div>
 
           <div className={styles.footer__content_contacts}>
-            <p className={styles.footer__content_contacts_title}>Appenzeller Huus Gonten AG</p>
-            <p className={styles.footer__content_contacts_address}>Dorfstrasse 29</p>
-            <p className={styles.footer__content_contacts_address}>9108 Gonten</p>
+            <p className={styles.footer__content_contacts_title}>Calydo AG</p>
+            <p className={styles.footer__content_contacts_address}>Sennweidstrasse 35</p>
+            <p className={styles.footer__content_contacts_address}>6312 Steinhausen</p>
             <p className={styles.footer__content_contacts_address}>Switzerland</p>
             <a className={styles.footer__content_contacts_data} href="info@appenzellerhuss.ch">
               <IconComponent name="mail" color="#000"/>
-              <p>info@appenzellerhuss.ch</p>
+              <p>info@calydo.com</p>
             </a>
             <a className={styles.footer__content_contacts_data} href="tel:+41 44 55 66 77">
               <IconComponent name="phone" color="#000"/>
-              <p>+41 71 510 95 95</p>
+              <p>+41 41 748 44 11</p>
             </a>
           </div>
         </div>
